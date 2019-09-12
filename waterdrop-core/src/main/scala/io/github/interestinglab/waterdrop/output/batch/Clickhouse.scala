@@ -131,13 +131,14 @@ class Clickhouse extends BaseOutput {
       fields = dfFields.toList
       initSQL = initPrepareSQL()
     }
-    df.foreachPartition { iter =>
+
+    df.rdd.foreachPartition { iter =>
       val executorBalanced = new BalancedClickhouseDataSource(this.jdbcLink, this.properties)
       val executorConn = executorBalanced.getConnection.asInstanceOf[ClickHouseConnectionImpl]
       val statement = executorConn.createClickHousePreparedStatement(this.initSQL)
       var length = 0
-      while (iter.hasNext) {
-        val item = iter.next()
+
+      iter.foreach {  item =>
         length += 1
         renderStatement(fields, item, dfFields, statement)
         statement.addBatch()

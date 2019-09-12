@@ -2,7 +2,7 @@ name         := "Waterdrop"
 version      := "1.4.1"
 organization := "io.github.interestinglab.waterdrop"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.8"
 
 // resolved sbt assembly merging file conflicts.
 assemblyMergeStrategy in assembly := {

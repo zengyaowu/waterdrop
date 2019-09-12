@@ -2,10 +2,10 @@ name         := "Waterdrop-core"
 version      := "1.4.1"
 organization := "io.github.interestinglab.waterdrop"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.8"
 
 
-val sparkVersion = "2.4.0"
+val sparkVersion = "2.4.4"
 
 // We should put all spark or hadoop dependencies here,
 //   if coresponding jar file exists in jars directory of online Spark distribution,
@@ -46,8 +46,8 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-sql-kafka-0-10" % sparkVersion,
   // --------------------------------------------------------
 
-  "org.mongodb.spark" %% "mongo-spark-connector" % "2.2.0",
-  "org.apache.kudu" %% "kudu-spark2" % "1.7.0",
+  "org.mongodb.spark" % "mongo-spark-connector_2.11" % "2.2.0",
+  "org.apache.kudu" % "kudu-spark2_2.11" % "1.7.0",
   "com.alibaba" % "QLExpress" % "3.2.0",
   "com.alibaba" % "fastjson" % "1.2.51",
   "com.alibaba" % "druid" % "1.1.10",

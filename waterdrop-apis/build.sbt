@@ -2,9 +2,9 @@ name         := "Waterdrop-apis"
 version      := "1.4.0"
 organization := "io.github.interestinglab.waterdrop"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.8"
 
-val sparkVersion = "2.4.0"
+val sparkVersion = "2.4.3"
 
 // We should put all spark or hadoop dependencies here,
 //   if coresponding jar file exists in jars directory of online Spark distribution,

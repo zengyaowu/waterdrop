@@ -2,7 +2,7 @@ name         := "Waterdrop-doctor"
 version      := "1.3.0"
 organization := "io.github.interestinglab.waterdrop"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.8"
 
 val sparkVersion = "2.4.0"
 
