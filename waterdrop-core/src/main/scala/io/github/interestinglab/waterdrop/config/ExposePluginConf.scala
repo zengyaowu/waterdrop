@@ -9,6 +9,14 @@ import collection.JavaConverters._
 
 object ExposePluginConf {
 
+  //把一些特殊的比如Stream的包所在的plugin注册到这里，方便下面加载到正确的plugin包
+  val pluginRegister = Map(
+    "mysqlv2" -> "mysql",
+    "hdfs" -> "file",
+    "s3" -> "file",
+    "Kafkastream" -> "kafka"
+  )
+
   def main(args: Array[String]): Unit = {
     assert(args.length ==2)
     val appdir = args(1)
@@ -18,19 +26,20 @@ object ExposePluginConf {
       .resolveWith(ConfigFactory.systemProperties(),ConfigResolveOptions.defaults().setAllowUnresolved(true))
 
 
+    println("config is : " + config.toString)
     val jarSet = new util.HashSet[String]()
 
     val pluginSet = new util.HashSet[String]()
 
     config.getConfigList("input").asScala.foreach(plugin =>{
       val pluginName = plugin.getString(ConfigBuilder.PluginNameKey)
-      pluginSet.add(pluginName)
+      pluginSet.add(pluginRegister.getOrElse(pluginName,pluginName))
     })
 
     config.getConfigList("output").asScala.foreach(plugin =>{
 
       val pluginName = plugin.getString(ConfigBuilder.PluginNameKey)
-      pluginSet.add(pluginName)
+      pluginSet.add(pluginRegister.getOrElse(pluginName,pluginName))
     })
 
 
@@ -42,7 +51,6 @@ object ExposePluginConf {
         }
       })
     })
-
 
     println(String.join(",",jarSet))
 
