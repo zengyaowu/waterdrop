@@ -34,8 +34,11 @@ class ConfigBuilder(configFile: String) {
         .resolve(ConfigResolveOptions.defaults().setAllowUnresolved(true))
         .resolveWith(ConfigFactory.systemProperties, ConfigResolveOptions.defaults.setAllowUnresolved(true))
 
+
       val options: ConfigRenderOptions = ConfigRenderOptions.concise.setFormatted(true)
-      println("[INFO] parsed config file: " + config.root().render(options))
+      val configStr = config.root().render(options)
+      println("[INFO] parsed config file: "  )
+      configStr.split("\n").filter(!_.toLowerCase().contains("pass")).foreach(println)
 
       config
     }) match {

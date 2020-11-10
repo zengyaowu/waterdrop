@@ -5,6 +5,8 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+build.sh
+
 # Package Files #
 *.jar
 *.war
@@ -19,6 +21,8 @@ target/
 # Intellij Idea files
 .idea/
 *.iml
+
+*/target/
 
 .DS_Store
 log4j.properties
