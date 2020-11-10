@@ -8,6 +8,24 @@
     <fileSets>
 
         <fileSet>
+            <directory>${project.parent.basedir}/distribution/bin</directory>
+            <includes>
+                <include>*</include>
+            </includes>
+            <fileMode>744</fileMode>
+            <outputDirectory>bin</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.parent.basedir}/distribution/conf</directory>
+            <includes>
+                <include>*</include>
+            </includes>
+            <outputDirectory>conf</outputDirectory>
+        </fileSet>
+
+
+        <fileSet>
             <directory>target/waterdrop-core</directory>
             <includes>
                 <include>*.jar</include>
@@ -25,14 +43,5 @@
         </fileSet>
 
 
-
-<!--        <fileSet>-->
-<!--            <directory>${project.parent.basedir}/example/bin</directory>-->
-<!--            <includes>-->
-<!--                <include>*</include>-->
-<!--            </includes>-->
-<!--            <fileMode>744</fileMode>-->
-<!--            <outputDirectory>bin</outputDirectory>-->
-<!--        </fileSet>-->
     </fileSets>
 </assembly>
