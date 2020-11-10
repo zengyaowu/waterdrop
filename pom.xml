@@ -12,6 +12,10 @@
         <module>waterdrop-config</module>
         <module>waterdrop-apis</module>
         <module>waterdrop-core</module>
+        <module>plugins/hive</module>
+        <module>plugins/clickhouse</module>
+        <module>plugins/mongodb</module>
+        <module>plugins/mysql</module>
         <module>distribution</module>
     </modules>
 

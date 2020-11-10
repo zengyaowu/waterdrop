@@ -1,0 +1,2 @@
+io.github.interestinglab.waterdrop.input.batch.Jdbc
+io.github.interestinglab.waterdrop.input.batch.Mysql
