@@ -25,6 +25,9 @@ class Clickhouse extends BaseOutput {
   var jdbcLink: String = _
   var initSQL: String = _
   var table: String = _
+  val retryNum :Int = 3
+  val sleepMilsec :Int = 1000
+
   var fields: java.util.List[String] = _
 
   var cluster: String = _
@@ -144,7 +147,7 @@ class Clickhouse extends BaseOutput {
     if (config.hasPath("preSqls")) {
       val preSqls = config.getString("preSqls")
       val retry = config.getInt("retry")
-      executeSQL(preSqls, retry)
+      executeSQL(preSqls, retry,true)
     }
   }
 
@@ -153,18 +156,35 @@ class Clickhouse extends BaseOutput {
     if (config.hasPath("afterSqls")) {
       val preSqls = config.getString("afterSqls")
       val retry = config.getInt("retry")
-      executeSQL(preSqls, retry)
+      executeSQL(preSqls, retry,true)
     }
   }
 
-  private def executeSQL(sqlstr: String, retry: Int): Unit = {
+  private def executeSQL(sqlstr: String, retry: Int, preOrAfterProcess: Boolean): Unit = {
     if(sqlstr !=null) {
       val executorBalanced = new BalancedClickhouseDataSource(this.jdbcLink, this.properties)
       val executorConn = executorBalanced.getConnection.asInstanceOf[ClickHouseConnectionImpl]
       sqlstr.split(";").foreach(sql => {
         val statement = executorConn.createClickHousePreparedStatement(sql, ResultSet.TYPE_FORWARD_ONLY)
-        execute(statement, retry)
+        execute(statement, retry, preOrAfterProcess)
       })
+    }
+  }
+
+  def getConnection(executorBalanced:BalancedClickhouseDataSource,num: Int): ClickHouseConnectionImpl ={
+    try{
+      val executorConn = executorBalanced.getConnection.asInstanceOf[ClickHouseConnectionImpl]
+      executorConn;
+    }catch {
+      case except:Exception => {
+        if(num < retryNum) {
+          Thread.sleep(sleepMilsec)
+          getConnection(executorBalanced,num + 1)
+        }else{
+          throw new RuntimeException("get clickhouse failed " );
+        }
+      }
+      case _  =>  null;
     }
   }
 
@@ -198,7 +218,7 @@ class Clickhouse extends BaseOutput {
       }
 
       val executorBalanced = new BalancedClickhouseDataSource(jdbcUrl, this.properties)
-      val executorConn = executorBalanced.getConnection.asInstanceOf[ClickHouseConnectionImpl]
+      val executorConn = getConnection(executorBalanced,1);
       val statement = executorConn.createClickHousePreparedStatement(this.initSQL, ResultSet.TYPE_FORWARD_ONLY)
       var length = 0
       while (iter.hasNext) {
@@ -209,12 +229,12 @@ class Clickhouse extends BaseOutput {
         statement.addBatch()
 
         if (length >= bulkSize) {
-          execute(statement, retry)
+          execute(statement, retry,false)
           length = 0
         }
       }
 
-      execute(statement, retry)
+      execute(statement, retry,false)
     }
   }
 
@@ -223,19 +243,22 @@ class Clickhouse extends BaseOutput {
     clickHouseProperties.getPort
   }
 
-  private def execute(statement: ClickHousePreparedStatement, retry: Int): Unit = {
-    val res = Try(statement.executeBatch())
+  private def execute(statement: ClickHousePreparedStatement, retry: Int, preOrAfterProcess: Boolean ): Unit = {
+    val msgPrefix = if (preOrAfterProcess) "Insert into" else "Execute"
+    val res = Try(if(preOrAfterProcess) statement.execute() else statement.executeBatch())
+
     res match {
       case Success(_) => {
-        logInfo("Insert into ClickHouse succeed")
+        logInfo(msgPrefix +"Insert into ClickHouse succeed")
         statement.close()
+
       }
       case Failure(e: ClickHouseException) => {
         val errorCode = e.getErrorCode
         if (retryCodes.contains(errorCode)) {
           logError("Insert into ClickHouse failed. Reason: ", e)
           if (retry > 0) {
-            execute(statement, retry - 1)
+            execute(statement, retry - 1,preOrAfterProcess)
           } else {
             logError("Insert into ClickHouse failed and retry failed, drop this bulk.")
             statement.close()
