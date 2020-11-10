@@ -16,6 +16,7 @@
         <module>plugins/clickhouse</module>
         <module>plugins/mongodb</module>
         <module>plugins/mysql</module>
+        <module>plugins/elasticsearch</module>
         <module>distribution</module>
     </modules>
 
