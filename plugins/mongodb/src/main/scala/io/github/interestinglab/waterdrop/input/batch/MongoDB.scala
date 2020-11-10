@@ -5,7 +5,7 @@ import com.mongodb.spark.MongoSpark
 import com.mongodb.spark.config.ReadConfig
 import io.github.interestinglab.waterdrop.apis.BaseStaticInput
 import io.github.interestinglab.waterdrop.config.{Config, ConfigFactory, TypesafeConfigUtils}
-import io.github.interestinglab.waterdrop.utils.SparkSturctTypeUtil
+import io.github.interestinglab.waterdrop.output.utils.SparkSturctTypeUtil
 import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
 

@@ -5,7 +5,7 @@ import java.util
 import io.github.interestinglab.waterdrop.config.{Config, ConfigFactory}
 import io.github.interestinglab.waterdrop.apis.BaseOutput
 import io.github.interestinglab.waterdrop.config.TypesafeConfigUtils
-import io.github.interestinglab.waterdrop.utils.StringTemplate
+import io.github.interestinglab.waterdrop.output.utils.StringTemplate
 import org.apache.spark.sql.{DataFrameWriter, Dataset, Row, SparkSession}
 
 import scala.collection.JavaConversions._

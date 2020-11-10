@@ -1,4 +1,4 @@
-package io.github.interestinglab.waterdrop.utils
+package io.github.interestinglab.waterdrop.output.utils
 
 import java.text.SimpleDateFormat
 import java.util.Locale

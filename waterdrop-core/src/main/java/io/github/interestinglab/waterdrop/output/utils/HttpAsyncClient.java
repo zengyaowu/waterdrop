@@ -1,4 +1,4 @@
-package io.github.interestinglab.waterdrop.utils;
+package io.github.interestinglab.waterdrop.output.utils;
 import org.apache.http.Consts;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthSchemeProvider;

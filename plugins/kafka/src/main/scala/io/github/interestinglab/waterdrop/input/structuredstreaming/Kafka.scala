@@ -10,7 +10,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature
 import io.github.interestinglab.waterdrop.apis.BaseStructuredStreamingInput
 import io.github.interestinglab.waterdrop.config.{Config, ConfigFactory, TypesafeConfigUtils}
 import io.github.interestinglab.waterdrop.core.RowConstant
-import io.github.interestinglab.waterdrop.utils.SparkSturctTypeUtil
+import io.github.interestinglab.waterdrop.output.utils.SparkSturctTypeUtil
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.common.TopicPartition
 import org.apache.spark.sql.functions._
@@ -21,7 +21,7 @@ import org.apache.spark.sql.{Dataset, Row, SparkSession}
 
 import scala.collection.JavaConversions._
 
-class KafkaStream extends BaseStructuredStreamingInput {
+class Kafka extends BaseStructuredStreamingInput {
   var config: Config = ConfigFactory.empty()
   var schema = new StructType()
   var topics: String = _

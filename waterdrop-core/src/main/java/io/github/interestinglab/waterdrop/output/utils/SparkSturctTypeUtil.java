@@ -1,4 +1,4 @@
-package io.github.interestinglab.waterdrop.utils;
+package io.github.interestinglab.waterdrop.output.utils;
 
 
 import com.alibaba.fastjson.JSONObject;

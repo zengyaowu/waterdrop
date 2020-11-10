@@ -10,7 +10,6 @@ import java.util.{Properties, Random}
 import io.github.interestinglab.waterdrop.UserRuntimeException
 import io.github.interestinglab.waterdrop.apis.BaseOutput
 import io.github.interestinglab.waterdrop.config.TypesafeConfigUtils
-import io.github.interestinglab.waterdrop.output.utils.KafkaProducerUtil
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.sql.{Dataset, Row, SparkSession}

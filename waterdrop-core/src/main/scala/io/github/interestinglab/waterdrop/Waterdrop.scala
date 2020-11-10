@@ -6,8 +6,8 @@ import io.github.interestinglab.waterdrop.apis._
 import io.github.interestinglab.waterdrop.config.Config
 import io.github.interestinglab.waterdrop.config._
 import io.github.interestinglab.waterdrop.filter.UdfRegister
+import io.github.interestinglab.waterdrop.output.utils.{AsciiArt, CompressionUtils}
 import io.github.interestinglab.waterdrop.utils.CompressionUtils
-import io.github.interestinglab.waterdrop.utils.AsciiArt
 import org.apache.commons.lang3.exception.ExceptionUtils
 import org.apache.hadoop.fs.Path
 import org.apache.spark.SparkConf
