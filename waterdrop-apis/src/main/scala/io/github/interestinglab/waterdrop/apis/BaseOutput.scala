@@ -4,7 +4,7 @@ import org.apache.spark.sql.{Dataset, Row}
 
 abstract class BaseOutput extends Plugin {
 
-  def beforeProcess(df: Dataset[Row]): Unit = {}
+  def preProcess(df: Dataset[Row]): Unit = {}
 
   def process(df: Dataset[Row])
 
