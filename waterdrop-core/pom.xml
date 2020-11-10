@@ -16,6 +16,7 @@
             <groupId>io.github.interestinglab.waterdrop</groupId>
             <artifactId>waterdrop-apis</artifactId>
             <version>${project.parent.version}</version>
+            <scope>compile</scope>
         </dependency>
 
 

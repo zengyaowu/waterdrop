@@ -14,7 +14,8 @@ object ExposePluginConf {
     "mysqlv2" -> "mysql",
     "hdfs" -> "file",
     "s3" -> "file",
-    "Kafkastream" -> "kafka"
+    "Kafkastream" -> "kafka",
+    "jdbc" -> "mysql"
   )
 
   def main(args: Array[String]): Unit = {
@@ -25,8 +26,6 @@ object ExposePluginConf {
       .resolve(ConfigResolveOptions.defaults().setAllowUnresolved(true))
       .resolveWith(ConfigFactory.systemProperties(),ConfigResolveOptions.defaults().setAllowUnresolved(true))
 
-
-    println("config is : " + config.toString)
     val jarSet = new util.HashSet[String]()
 
     val pluginSet = new util.HashSet[String]()

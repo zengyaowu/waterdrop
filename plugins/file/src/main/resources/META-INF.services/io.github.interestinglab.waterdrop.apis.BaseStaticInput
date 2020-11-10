@@ -1,2 +1,2 @@
-io.github.interestinglab.waterdrop.extension.input.batch.File
-io.github.interestinglab.waterdrop.extension.input.batch.Hdfs
+io.github.interestinglab.waterdrop.input.batch.File
+io.github.interestinglab.waterdrop.input.batch.Hdfs

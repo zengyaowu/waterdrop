@@ -1,4 +1,0 @@
-io.github.interestinglab.waterdrop.extension.output.batch.File
-io.github.interestinglab.waterdrop.extension.output.batch.GenericFileOutputBase
-io.github.interestinglab.waterdrop.extension.output.batch.Hdfs
-io.github.interestinglab.waterdrop.extension.output.batch.S3
