@@ -17,6 +17,10 @@
         <module>plugins/mongodb</module>
         <module>plugins/mysql</module>
         <module>plugins/elasticsearch</module>
+        <module>plugins/hbase</module>
+        <module>plugins/file</module>
+        <module>plugins/redis</module>
+        <module>plugins/tidb</module>
         <module>distribution</module>
     </modules>
 
