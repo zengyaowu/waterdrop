@@ -245,8 +245,11 @@ object Waterdrop extends Logging {
       }
       case false => ds
     }
+    
 
+    output.preProcess(fromDs)
     output.process(fromDs)
+    output.afterProcess(fromDs)
   }
 
   private[waterdrop] def basePrepare(sparkSession: SparkSession, plugins: List[Plugin]*): Unit = {
