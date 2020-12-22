@@ -1,4 +1,3 @@
 io.github.interestinglab.waterdrop.output.batch.File
-io.github.interestinglab.waterdrop.output.batch.FileOutputBase
 io.github.interestinglab.waterdrop.output.batch.Hdfs
 io.github.interestinglab.waterdrop.output.batch.S3
